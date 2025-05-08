@@ -41,6 +41,6 @@ app.post('/track', async (req, res) => {
   }
 });
 
-// ✅ Σωστό για Render – ΧΩΡΙΣ fallback σε 10000
+// ✅ Σωστό για Render – ΧΩΡΙΣ fallback
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`Proxy API listening on port ${PORT}`));
