@@ -1,6 +1,7 @@
 const express = require('express');
 const fetch = require('node-fetch');
 const app = express();
+
 app.use(express.json());
 
 app.post('/track', async (req, res) => {
@@ -29,6 +30,10 @@ app.post('/track', async (req, res) => {
       })
     });
 
+    if (!response.ok) {
+      return res.status(response.status).json({ error: `Qualco API returned status ${response.status}` });
+    }
+
     const data = await response.json();
     res.json(data);
   } catch (error) {
@@ -36,5 +41,6 @@ app.post('/track', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
+// ✅ Το σωστό για Render: ΧΩΡΙΣ fallback σε σταθερό port
+const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`Proxy API listening on port ${PORT}`));
